@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "author": "Dung Phung Thi Thuy",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 80, "left": 40, "attrs": {} },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht",
+      "top": -18.9,
+      "left": 244.2,
+      "attrs": { "temperature": "25", "humidity": "50" }
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "ultra",
+      "top": 1.5,
+      "left": -186.5,
+      "attrs": { "distance": "100" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 302.4,
+      "left": 191.45,
+      "rotate": 90,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led",
+      "top": 303.6,
+      "left": 368.6,
+      "attrs": { "color": "green" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "dht:SDA", "esp:D15", "green", [ "v30", "h0.1", "v122.3" ] ],
+    [ "dht:VCC", "esp:3V3", "red", [ "v76.8", "v94.5" ] ],
+    [ "dht:GND", "esp:GND.1", "black", [ "v163.2", "v37" ] ],
+    [ "ultra:TRIG", "esp:D5", "blue", [ "v76.8", "h246.5" ] ],
+    [ "ultra:ECHO", "esp:D18", "orange", [ "v67.2", "h236.5" ] ],
+    [ "ultra:VCC", "esp:VIN", "red", [ "v144", "h208.2" ] ],
+    [ "ultra:GND", "esp:GND.2", "black", [ "v134.4", "h178.2" ] ],
+    [ "esp:D2", "r1:1", "green", [ "h80", "v68", "h-0.5" ] ],
+    [ "r1:2", "led:A", "green", [ "h65" ] ],
+    [ "led:C", "esp:GND.2", "black", [ "v60", "h-300", "v-50" ] ]
+  ],
+  "serialMonitor": { "convertEol": false, "display": "always", "newline": "lf" },
+  "dependencies": {}
+}
